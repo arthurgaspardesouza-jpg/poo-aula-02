@@ -1,5 +1,32 @@
 import os
 
+class Pessoa:
+    def __init__(self, nome, idade, email):
+        self.nome = nome
+        self.idade = idade
+        self.email = email
+
+    def exibir_info(self):
+        return f"{self.nome} ({self.idade} anos) - Email: {self.email}"
+
+
+class Medico(Pessoa):
+    def __init__(self, nome, idade, email, especialidade):
+        super().__init__(nome, idade, email)
+        self.especialidade = especialidade
+
+    def atender(self):
+        print(f"O(A) médico(a) {self.nome} está em atendimento.")
+
+
+class Paciente(Pessoa):
+    def __init__(self, nome, idade, email, historico=""):
+        super().__init__(nome, idade, email)
+        self.historico = historico
+
+    def marcar_consulta(self, medico, data):
+        return Consulta(data, self, medico)
+
 class Consulta:
     def __init__(self, data, paciente, medico):
         self.data = data
