@@ -27,6 +27,7 @@ class Paciente(Pessoa):
     def marcar_consulta(self, medico, data):
         return Consulta(data, self, medico)
 
+
 class Consulta:
     def __init__(self, data, paciente, medico):
         self.data = data
@@ -75,12 +76,24 @@ while True:
 
     # Cadastrar Médico
     if opcao == "1":
-        ####### CRIE O CÓDIGO PARA CADASTRAR MÉDICO
+        nome = input("Nome do médico: ")
+        idade = int(input("Idade: "))
+        email = input("E-mail: ")
+        especialidade = input("Especialidade: ")
+        
+        novo_medico = Medico(nome, idade, email, especialidade)
+        medicos.append(novo_medico)
         print("Médico cadastrado com sucesso!\n")
 
     # Cadastrar Paciente
     elif opcao == "2":
-        ####### CRIE O CÓDICO PARA CADASTRAR PACIENTE
+        nome = input("Nome do paciente: ")
+        idade = int(input("Idade: "))
+        email = input("E-mail: ")
+        historico = input("Histórico (opcional): ")
+        
+        novo_paciente = Paciente(nome, idade, email, historico)
+        pacientes.append(novo_paciente)
         print("Paciente cadastrado com sucesso!\n")
 
     # Listar Médicos
@@ -91,8 +104,12 @@ while True:
 
     # Listar Pacientes
     elif opcao == "4":
-        ####### CRIE O CÓDIGO PARA LISTAR PACIENTES
-        print()
+        if not pacientes:
+            print("Nenhum paciente cadastrado.\n")
+        else:
+            for i, p in enumerate(pacientes):
+                print(f"{i} - {p.exibir_info()} | Histórico: {p.historico or 'Nenhum'}")
+            print()
 
     # Marcar Consulta
     elif opcao == "5":
@@ -116,8 +133,11 @@ while True:
 
     # Listar Consultas
     elif opcao == "6":
-        ###### CRIE O CÓDIGO PARA LISTAR AS CONSULTAS
-        print()
+        if not consultas:
+            print("Nenhuma consulta cadastrada.\n")
+        else:
+            for c in consultas:
+                c.exibir_consulta()
 
     # Registrar Diagnóstico
     elif opcao == "7":
